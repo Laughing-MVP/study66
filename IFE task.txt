@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>菜鸟教程(runoob.com)</title>
+	<style>
+        li{
+            display:inline-block;
+            background-color: red;
+            color: #fff;
+            font-size:20px;
+            text-align:center;
+            padding:5px;
+            margin:5px;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+	
+    <input type="text" id="inNum" name="number">
+    <button id="btnLeftIn">左侧入</button>
+    <button id="btnRightIn">右侧入</button>
+    <button id="btnLeftOut">左侧出</button>
+    <button id="btnRightOut">右侧出</button>
+    <ul id="outNum"></ul>
+
+<script>
+var input = document.getElementById("inNum");
+var list = document.getElementById("outNum");
+var btn1 = document.getElementById("btnLeftIn");
+var btn2 = document.getElementById("btnRightIn");
+var btn3 = document.getElementById("btnLeftOut");
+var btn4 = document.getElementById("btnRightOut");
+function add(arg) {
+		if(input.value=="") {
+		alert("输入数字为空！");
+		input.focus();		
+		}
+		else if(isNaN(input.value)) {
+		alert("只能输入数字！")
+		input.focus();
+		}
+		else {
+			var listItem = document.createElement("li");
+			listItem.textContent = input.value;
+			if(arg==="left") {
+				list.insertBefore(listItem,list.firstChild);
+			}
+			else(arg==="left") {
+				list.appendChild(listItem);  //"else"后面不能接条件语句
+			}
+			input.value = "";
+			input.focus();
+		}
+}
+function dele(arg) {
+		if(list.childNodes.length<=0) {alert("没有可以删除的数字！");
+									  return false;}
+		else {
+			if(arg==="left") {list.removeChild(list.firstChild);}
+			else {list.removeChild(list.lastChild);}
+		}
+}
+list.addEventListener("click",function(event) {
+	list.removeChild(event.target);
+})
+	btn1.onclick = function() {add("left");};
+	btn2.onclick = function() {add("right");};
+	btn3.onclick = function() {dele("left");};
+	btn4.onclick = function() {dele("right");};
+</script>
+
+</body>
+</html>
