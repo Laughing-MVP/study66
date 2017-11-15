@@ -1,0 +1,119 @@
+/*这个效果描述就是假如有四个导航条四个内容区，点到相应的导航就出现相应的内容
+*/
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>菜鸟教程(runoob.com)</title>
+<style type="text/css">
+            *{
+                margin:0;
+                padding:0;
+            }
+            #box{
+                width: 500px;
+                height: 350px;
+                margin: 100px auto;
+                border:1px solid #f40;
+                padding-top: 50px;
+            }
+            #list{
+                overflow: hidden;
+                margin-bottom: 20px;
+            }
+            #list li{
+                list-style: none;
+                width: 100px;
+                height:40px;
+                line-height: 40px;
+                text-align: center;
+                background: red;
+                float: left;
+                margin-left: 20px;
+            }
+            #list li a{
+                text-decoration: none;
+                font-family: "微软雅黑";
+                color:#fff;
+            }
+            #pro{
+                width: 100%;
+                height:289px;
+                border:1px solid #000;
+                position: relative;
+            }
+            p{
+                font-family: "微软雅黑";
+                position: absolute;
+                top:0;
+                left:120px;
+                display: none;
+            }
+            #list li.active{
+                background: #008000;
+            }
+            .p1 {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="box">
+            <ul id="list">
+                <li class="active"><a href="">北京</a></li>
+                <li><a href="">天津</a></li>
+                <li><a href="">上海</a></li>
+                <li><a href="">重庆</a></li>
+            </ul>
+            <div id="pro">
+                <p class="p1">我是北京我是北京我是北京我是北京</p>
+                <p>我是天津我是天津我是天津我是天津</p>
+                <p>我是上海我是上海我是上海我是上海</p>
+                <p>我是重庆我是重庆我是重庆我是重庆</p>
+            </div>
+        </div>
+
+<script>
+	/*实现点击一个城市链接，下面出现相应的文字介绍：
+(1) 遍历每个链接，并取消链接跳转的默认设置；
+(2) 遍历每个段落；
+(3) 为当前点击的段落添加相应的类，并先清除之前的类；*/
+	
+function myFunction() {
+	var oul = document.getElementById("list");
+	var links = oul.getElementsByTagName("li");
+	var pro = document.getElementById("pro");
+	var para = pro.getElementsByTagName("p");
+	//var index=0;
+	for(var i = 0; i<links.length; i++) {
+		links[i].index=i;
+		links[i].onclick = function() {
+	for(var j =0; j<para.length;j++) {
+		if(this.index==j) {
+		links[j].className="active";
+		para[j].className="p1";
+		}
+		else {
+		links[j].className="";
+		para[j].className="";
+		}
+	}
+	return false;
+		};
+	}
+	}
+/*function displayPara() {
+	var para = pro.getElementsByTagName("p");
+	for(var j =0; j<para.length;j++) {
+		para[j].className="";
+		j = index;
+		para[index].className="p1";
+	}
+	return false;
+}
+}*/
+window.onload = function(){myFunction()};
+</script>
+
+</body>
+</html>
