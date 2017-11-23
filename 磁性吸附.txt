@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>´ÅÐÔÎü¸½</title>
+<style>
+#box
+{
+	width: 100px;
+	height: 100px;
+	background-color:#d0e4fe;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+
+</style>
+</head>
+
+<body>
+<div id="box">
+	
+</div>
+<script>
+	var box = document.getElementById("box");
+	var offset = [box.offsetWidth,box.offsetHeight];
+	var doW = document.documentElement.clientWidth;
+	var doH = document.documentElement.clientHeight;
+	var maxX = doW - offset[0];
+	var maxY = doH - offset[1];
+	box.onmousedown = function(e) {
+		e= e||event;
+		e.preventDefault;
+		var client = [e.clientX,e.clientY];
+		var offdis = [box.offsetLeft,box.offsetTop];
+	document.addEventListener("mousemove",move);
+	document.addEventListener("mouseup",up);
+		function move(e) {
+			var dis = [e.clientX-client[0],e.clientY-client[1]];
+			var oL = offdis[0] + dis[0];
+			var oT = offdis[1] + dis[1];
+			var X = oL;
+			var Y = oT;
+		if(oL<50) {X=0;}
+		if(doW-(oL+offset[0])<50) {X=maxX}
+		if(oT<50) {Y=0}
+		if(doH-(oT+offset[1])<50) {Y=maxY}
+			box.style.left = X +"px";
+			box.style.top = Y + "px";
+		}
+		function up(e) {
+		document.removeEventListener("mousemove",move);
+		document.removeEventListener("mouseup",up);
+			var dis = [e.clientX-client[0],e.clientY-client[1]];
+			var oL = offdis[0] + dis[0];
+			var oT = offdis[1] + dis[1];
+			var X = oL;
+			var Y = oT;
+		if(oL<50) {X=0;}
+		if(doW-(oL+offset[0])<50) {X=maxX}
+		if(oT<50) {Y=0}
+		if(doH-(oT+offset[1])<50) {Y=maxY}
+			box.style.left = X +"px";
+			box.style.top = Y + "px";
+		}
+	};
+</script>
+</body>
+</html>
